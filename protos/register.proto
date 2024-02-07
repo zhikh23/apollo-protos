@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package register;
+
+service Register {
+    rpc RegisterMaterial(RegisterRequest) returns (RegisterResponse);
+}
+
+message RegisterRequest {
+    string          name        = 1;
+    string          description = 2;
+    repeated string tags        = 3;
+    string          url         = 4;
+}
+
+message RegisterResponse {
+    uint64          material_id = 1;
+}
