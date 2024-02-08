@@ -23,6 +23,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RegisterClient interface {
 	RegisterMaterial(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
+	GetMaterialById(ctx context.Context, in *GetMaterialByIdRequest, opts ...grpc.CallOption) (*GetMaterialByIdResponse, error)
+	GetMaterialsByTags(ctx context.Context, in *GetMaterialsByTagsRequest, opts ...grpc.CallOption) (*GetMaterialsByTagsResponse, error)
 }
 
 type registerClient struct {
@@ -42,11 +44,31 @@ func (c *registerClient) RegisterMaterial(ctx context.Context, in *RegisterReque
 	return out, nil
 }
 
+func (c *registerClient) GetMaterialById(ctx context.Context, in *GetMaterialByIdRequest, opts ...grpc.CallOption) (*GetMaterialByIdResponse, error) {
+	out := new(GetMaterialByIdResponse)
+	err := c.cc.Invoke(ctx, "/register.Register/GetMaterialById", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *registerClient) GetMaterialsByTags(ctx context.Context, in *GetMaterialsByTagsRequest, opts ...grpc.CallOption) (*GetMaterialsByTagsResponse, error) {
+	out := new(GetMaterialsByTagsResponse)
+	err := c.cc.Invoke(ctx, "/register.Register/GetMaterialsByTags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RegisterServer is the server API for Register service.
 // All implementations must embed UnimplementedRegisterServer
 // for forward compatibility
 type RegisterServer interface {
 	RegisterMaterial(context.Context, *RegisterRequest) (*RegisterResponse, error)
+	GetMaterialById(context.Context, *GetMaterialByIdRequest) (*GetMaterialByIdResponse, error)
+	GetMaterialsByTags(context.Context, *GetMaterialsByTagsRequest) (*GetMaterialsByTagsResponse, error)
 	mustEmbedUnimplementedRegisterServer()
 }
 
@@ -56,6 +78,12 @@ type UnimplementedRegisterServer struct {
 
 func (UnimplementedRegisterServer) RegisterMaterial(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterMaterial not implemented")
+}
+func (UnimplementedRegisterServer) GetMaterialById(context.Context, *GetMaterialByIdRequest) (*GetMaterialByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMaterialById not implemented")
+}
+func (UnimplementedRegisterServer) GetMaterialsByTags(context.Context, *GetMaterialsByTagsRequest) (*GetMaterialsByTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMaterialsByTags not implemented")
 }
 func (UnimplementedRegisterServer) mustEmbedUnimplementedRegisterServer() {}
 
@@ -88,6 +116,42 @@ func _Register_RegisterMaterial_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Register_GetMaterialById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaterialByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegisterServer).GetMaterialById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/register.Register/GetMaterialById",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegisterServer).GetMaterialById(ctx, req.(*GetMaterialByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Register_GetMaterialsByTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaterialsByTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RegisterServer).GetMaterialsByTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/register.Register/GetMaterialsByTags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RegisterServer).GetMaterialsByTags(ctx, req.(*GetMaterialsByTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Register_ServiceDesc is the grpc.ServiceDesc for Register service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +162,14 @@ var Register_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterMaterial",
 			Handler:    _Register_RegisterMaterial_Handler,
+		},
+		{
+			MethodName: "GetMaterialById",
+			Handler:    _Register_GetMaterialById_Handler,
+		},
+		{
+			MethodName: "GetMaterialsByTags",
+			Handler:    _Register_GetMaterialsByTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

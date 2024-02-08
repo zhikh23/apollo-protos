@@ -6,15 +6,42 @@ option go_package = "gen/go/register";
 
 service Register {
     rpc RegisterMaterial(RegisterRequest) returns (RegisterResponse);
+    rpc GetMaterialById(GetMaterialByIdRequest) returns (GetMaterialByIdResponse);
+    rpc GetMaterialsByTags(GetMaterialsByTagsRequest) returns (GetMaterialsByTagsResponse);
 }
 
+message Material {
+    uint64            id          = 1;
+    string            name        = 2;
+    string            description = 3;
+    repeated string   tags        = 4;
+    string            url         = 5;
+}
+
+
 message RegisterRequest {
-    string          name        = 1;
-    string          description = 2;
-    repeated string tags        = 3;
-    string          url         = 4;
+    string            name        = 1;
+    string            description = 2;
+    repeated string   tags        = 3;
+    string            url         = 4;
 }
 
 message RegisterResponse {
-    uint64          material_id = 1;
+    uint64            material_id = 1;
+}
+
+message GetMaterialByIdRequest {
+    uint64            material_id = 1;
+}
+
+message GetMaterialByIdResponse {
+    Material          material    = 1;
+}
+
+message GetMaterialsByTagsRequest {
+    repeated string   tags        = 1;
+}
+
+message GetMaterialsByTagsResponse {
+    repeated Material materials   = 1;
 }
