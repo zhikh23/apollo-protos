@@ -18,158 +18,158 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// RegisterClient is the client API for Register service.
+// RegisterServiceClient is the client API for RegisterService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type RegisterClient interface {
+type RegisterServiceClient interface {
 	RegisterMaterial(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	GetMaterialById(ctx context.Context, in *GetMaterialByIdRequest, opts ...grpc.CallOption) (*GetMaterialByIdResponse, error)
 	GetMaterialsByTags(ctx context.Context, in *GetMaterialsByTagsRequest, opts ...grpc.CallOption) (*GetMaterialsByTagsResponse, error)
 }
 
-type registerClient struct {
+type registerServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewRegisterClient(cc grpc.ClientConnInterface) RegisterClient {
-	return &registerClient{cc}
+func NewRegisterServiceClient(cc grpc.ClientConnInterface) RegisterServiceClient {
+	return &registerServiceClient{cc}
 }
 
-func (c *registerClient) RegisterMaterial(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
+func (c *registerServiceClient) RegisterMaterial(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
 	out := new(RegisterResponse)
-	err := c.cc.Invoke(ctx, "/register.Register/RegisterMaterial", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/appolo.RegisterService/RegisterMaterial", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *registerClient) GetMaterialById(ctx context.Context, in *GetMaterialByIdRequest, opts ...grpc.CallOption) (*GetMaterialByIdResponse, error) {
+func (c *registerServiceClient) GetMaterialById(ctx context.Context, in *GetMaterialByIdRequest, opts ...grpc.CallOption) (*GetMaterialByIdResponse, error) {
 	out := new(GetMaterialByIdResponse)
-	err := c.cc.Invoke(ctx, "/register.Register/GetMaterialById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/appolo.RegisterService/GetMaterialById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *registerClient) GetMaterialsByTags(ctx context.Context, in *GetMaterialsByTagsRequest, opts ...grpc.CallOption) (*GetMaterialsByTagsResponse, error) {
+func (c *registerServiceClient) GetMaterialsByTags(ctx context.Context, in *GetMaterialsByTagsRequest, opts ...grpc.CallOption) (*GetMaterialsByTagsResponse, error) {
 	out := new(GetMaterialsByTagsResponse)
-	err := c.cc.Invoke(ctx, "/register.Register/GetMaterialsByTags", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/appolo.RegisterService/GetMaterialsByTags", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// RegisterServer is the server API for Register service.
-// All implementations must embed UnimplementedRegisterServer
+// RegisterServiceServer is the server API for RegisterService service.
+// All implementations must embed UnimplementedRegisterServiceServer
 // for forward compatibility
-type RegisterServer interface {
+type RegisterServiceServer interface {
 	RegisterMaterial(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	GetMaterialById(context.Context, *GetMaterialByIdRequest) (*GetMaterialByIdResponse, error)
 	GetMaterialsByTags(context.Context, *GetMaterialsByTagsRequest) (*GetMaterialsByTagsResponse, error)
-	mustEmbedUnimplementedRegisterServer()
+	mustEmbedUnimplementedRegisterServiceServer()
 }
 
-// UnimplementedRegisterServer must be embedded to have forward compatible implementations.
-type UnimplementedRegisterServer struct {
+// UnimplementedRegisterServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedRegisterServiceServer struct {
 }
 
-func (UnimplementedRegisterServer) RegisterMaterial(context.Context, *RegisterRequest) (*RegisterResponse, error) {
+func (UnimplementedRegisterServiceServer) RegisterMaterial(context.Context, *RegisterRequest) (*RegisterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterMaterial not implemented")
 }
-func (UnimplementedRegisterServer) GetMaterialById(context.Context, *GetMaterialByIdRequest) (*GetMaterialByIdResponse, error) {
+func (UnimplementedRegisterServiceServer) GetMaterialById(context.Context, *GetMaterialByIdRequest) (*GetMaterialByIdResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMaterialById not implemented")
 }
-func (UnimplementedRegisterServer) GetMaterialsByTags(context.Context, *GetMaterialsByTagsRequest) (*GetMaterialsByTagsResponse, error) {
+func (UnimplementedRegisterServiceServer) GetMaterialsByTags(context.Context, *GetMaterialsByTagsRequest) (*GetMaterialsByTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMaterialsByTags not implemented")
 }
-func (UnimplementedRegisterServer) mustEmbedUnimplementedRegisterServer() {}
+func (UnimplementedRegisterServiceServer) mustEmbedUnimplementedRegisterServiceServer() {}
 
-// UnsafeRegisterServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to RegisterServer will
+// UnsafeRegisterServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RegisterServiceServer will
 // result in compilation errors.
-type UnsafeRegisterServer interface {
-	mustEmbedUnimplementedRegisterServer()
+type UnsafeRegisterServiceServer interface {
+	mustEmbedUnimplementedRegisterServiceServer()
 }
 
-func RegisterRegisterServer(s grpc.ServiceRegistrar, srv RegisterServer) {
-	s.RegisterService(&Register_ServiceDesc, srv)
+func RegisterRegisterServiceServer(s grpc.ServiceRegistrar, srv RegisterServiceServer) {
+	s.RegisterService(&RegisterService_ServiceDesc, srv)
 }
 
-func _Register_RegisterMaterial_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RegisterService_RegisterMaterial_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegisterServer).RegisterMaterial(ctx, in)
+		return srv.(RegisterServiceServer).RegisterMaterial(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/register.Register/RegisterMaterial",
+		FullMethod: "/appolo.RegisterService/RegisterMaterial",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegisterServer).RegisterMaterial(ctx, req.(*RegisterRequest))
+		return srv.(RegisterServiceServer).RegisterMaterial(ctx, req.(*RegisterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Register_GetMaterialById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RegisterService_GetMaterialById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMaterialByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegisterServer).GetMaterialById(ctx, in)
+		return srv.(RegisterServiceServer).GetMaterialById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/register.Register/GetMaterialById",
+		FullMethod: "/appolo.RegisterService/GetMaterialById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegisterServer).GetMaterialById(ctx, req.(*GetMaterialByIdRequest))
+		return srv.(RegisterServiceServer).GetMaterialById(ctx, req.(*GetMaterialByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Register_GetMaterialsByTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _RegisterService_GetMaterialsByTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMaterialsByTagsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegisterServer).GetMaterialsByTags(ctx, in)
+		return srv.(RegisterServiceServer).GetMaterialsByTags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/register.Register/GetMaterialsByTags",
+		FullMethod: "/appolo.RegisterService/GetMaterialsByTags",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegisterServer).GetMaterialsByTags(ctx, req.(*GetMaterialsByTagsRequest))
+		return srv.(RegisterServiceServer).GetMaterialsByTags(ctx, req.(*GetMaterialsByTagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Register_ServiceDesc is the grpc.ServiceDesc for Register service.
+// RegisterService_ServiceDesc is the grpc.ServiceDesc for RegisterService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Register_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "register.Register",
-	HandlerType: (*RegisterServer)(nil),
+var RegisterService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "appolo.RegisterService",
+	HandlerType: (*RegisterServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "RegisterMaterial",
-			Handler:    _Register_RegisterMaterial_Handler,
+			Handler:    _RegisterService_RegisterMaterial_Handler,
 		},
 		{
 			MethodName: "GetMaterialById",
-			Handler:    _Register_GetMaterialById_Handler,
+			Handler:    _RegisterService_GetMaterialById_Handler,
 		},
 		{
 			MethodName: "GetMaterialsByTags",
-			Handler:    _Register_GetMaterialsByTags_Handler,
+			Handler:    _RegisterService_GetMaterialsByTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
