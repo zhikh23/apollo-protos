@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package appolo;
+
+option go_package = "gen/go/storage";
+
+service Storage {
+    rpc SaveFile(stream SaveFileRequest) returns (SaveFileResponse);
+    rpc GetFile(GetFileRequest) returns (stream GetFileResponse);
+}
+
+message File {
+    bytes  data    = 1;
+    string name    = 2;
+    int64  size    = 3;
+}
+
+message SaveFileRequest {
+    File   file    = 1;
+}
+
+message SaveFileResponse {
+    uint64 file_id = 1;
+}
+
+message GetFileRequest {
+    uint64 file_id = 1;
+}
+
+message GetFileResponse {
+    File   file    = 1;
+    bool   success = 2;
+}
