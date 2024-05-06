@@ -14,39 +14,39 @@ class RegisterServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.RegisterMaterial = channel.unary_unary(
-                '/apollo.RegisterService/RegisterMaterial',
-                request_serializer=register__pb2.RegisterRequest.SerializeToString,
-                response_deserializer=register__pb2.RegisterResponse.FromString,
+        self.RegisterResource = channel.unary_unary(
+                '/apollo.RegisterService/RegisterResource',
+                request_serializer=register__pb2.RegisterResourceRequest.SerializeToString,
+                response_deserializer=register__pb2.RegisterResourceResponse.FromString,
                 )
-        self.GetMaterialById = channel.unary_unary(
-                '/apollo.RegisterService/GetMaterialById',
-                request_serializer=register__pb2.GetMaterialByIdRequest.SerializeToString,
-                response_deserializer=register__pb2.GetMaterialByIdResponse.FromString,
+        self.GetResourceById = channel.unary_unary(
+                '/apollo.RegisterService/GetResourceById',
+                request_serializer=register__pb2.GetResourceByIdRequest.SerializeToString,
+                response_deserializer=register__pb2.GetResourceByIdResponse.FromString,
                 )
-        self.GetMaterialsByTags = channel.unary_unary(
-                '/apollo.RegisterService/GetMaterialsByTags',
-                request_serializer=register__pb2.GetMaterialsByTagsRequest.SerializeToString,
-                response_deserializer=register__pb2.GetMaterialsByTagsResponse.FromString,
+        self.GetResourcesByTags = channel.unary_unary(
+                '/apollo.RegisterService/GetResourcesByTags',
+                request_serializer=register__pb2.GetResourcesByTagsRequest.SerializeToString,
+                response_deserializer=register__pb2.GetResourcesByTagsResponse.FromString,
                 )
 
 
 class RegisterServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def RegisterMaterial(self, request, context):
+    def RegisterResource(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetMaterialById(self, request, context):
+    def GetResourceById(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetMaterialsByTags(self, request, context):
+    def GetResourcesByTags(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -55,20 +55,20 @@ class RegisterServiceServicer(object):
 
 def add_RegisterServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'RegisterMaterial': grpc.unary_unary_rpc_method_handler(
-                    servicer.RegisterMaterial,
-                    request_deserializer=register__pb2.RegisterRequest.FromString,
-                    response_serializer=register__pb2.RegisterResponse.SerializeToString,
+            'RegisterResource': grpc.unary_unary_rpc_method_handler(
+                    servicer.RegisterResource,
+                    request_deserializer=register__pb2.RegisterResourceRequest.FromString,
+                    response_serializer=register__pb2.RegisterResourceResponse.SerializeToString,
             ),
-            'GetMaterialById': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetMaterialById,
-                    request_deserializer=register__pb2.GetMaterialByIdRequest.FromString,
-                    response_serializer=register__pb2.GetMaterialByIdResponse.SerializeToString,
+            'GetResourceById': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetResourceById,
+                    request_deserializer=register__pb2.GetResourceByIdRequest.FromString,
+                    response_serializer=register__pb2.GetResourceByIdResponse.SerializeToString,
             ),
-            'GetMaterialsByTags': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetMaterialsByTags,
-                    request_deserializer=register__pb2.GetMaterialsByTagsRequest.FromString,
-                    response_serializer=register__pb2.GetMaterialsByTagsResponse.SerializeToString,
+            'GetResourcesByTags': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetResourcesByTags,
+                    request_deserializer=register__pb2.GetResourcesByTagsRequest.FromString,
+                    response_serializer=register__pb2.GetResourcesByTagsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -81,7 +81,7 @@ class RegisterService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def RegisterMaterial(request,
+    def RegisterResource(request,
             target,
             options=(),
             channel_credentials=None,
@@ -91,14 +91,14 @@ class RegisterService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/apollo.RegisterService/RegisterMaterial',
-            register__pb2.RegisterRequest.SerializeToString,
-            register__pb2.RegisterResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/apollo.RegisterService/RegisterResource',
+            register__pb2.RegisterResourceRequest.SerializeToString,
+            register__pb2.RegisterResourceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetMaterialById(request,
+    def GetResourceById(request,
             target,
             options=(),
             channel_credentials=None,
@@ -108,14 +108,14 @@ class RegisterService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/apollo.RegisterService/GetMaterialById',
-            register__pb2.GetMaterialByIdRequest.SerializeToString,
-            register__pb2.GetMaterialByIdResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/apollo.RegisterService/GetResourceById',
+            register__pb2.GetResourceByIdRequest.SerializeToString,
+            register__pb2.GetResourceByIdResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetMaterialsByTags(request,
+    def GetResourcesByTags(request,
             target,
             options=(),
             channel_credentials=None,
@@ -125,8 +125,8 @@ class RegisterService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/apollo.RegisterService/GetMaterialsByTags',
-            register__pb2.GetMaterialsByTagsRequest.SerializeToString,
-            register__pb2.GetMaterialsByTagsResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/apollo.RegisterService/GetResourcesByTags',
+            register__pb2.GetResourcesByTagsRequest.SerializeToString,
+            register__pb2.GetResourcesByTagsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

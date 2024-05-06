@@ -5,9 +5,16 @@ package apollo;
 option go_package = "gen/go/register";
 
 service RegisterService {
-    rpc RegisterMaterial(RegisterRequest) returns (RegisterResponse);
-    rpc GetMaterialById(GetMaterialByIdRequest) returns (GetMaterialByIdResponse);
-    rpc GetMaterialsByTags(GetMaterialsByTagsRequest) returns (GetMaterialsByTagsResponse);
+    rpc RegisterResource  (RegisterResourceRequest)   returns (RegisterResourceResponse);
+    rpc GetResourceById   (GetResourceByIdRequest)    returns (GetResourceByIdResponse);
+    rpc GetResourcesByTags(GetResourcesByTagsRequest) returns (GetResourcesByTagsResponse);
+}
+
+
+enum ResourceType {
+    unknown = 0;
+    file    = 1;
+    url     = 2;
 }
 
 message Material {
@@ -15,33 +22,36 @@ message Material {
     string            name        = 2;
     string            description = 3;
     repeated string   tags        = 4;
-    string            url         = 5;
+    ResourceType      type        = 5;
+    optional uint64   file_id     = 6;
+    optional string   url         = 7;
 }
 
-
-message RegisterRequest {
+message RegisterResourceRequest {
     string            name        = 1;
     string            description = 2;
     repeated string   tags        = 3;
-    string            url         = 4;
+    ResourceType      type        = 4;
+    optional uint64   file_id     = 5;
+    optional string   url         = 6;
 }
 
-message RegisterResponse {
+message RegisterResourceResponse {
     uint64            material_id = 1;
 }
 
-message GetMaterialByIdRequest {
+message GetResourceByIdRequest {
     uint64            material_id = 1;
 }
 
-message GetMaterialByIdResponse {
+message GetResourceByIdResponse {
     Material          material    = 1;
 }
 
-message GetMaterialsByTagsRequest {
+message GetResourcesByTagsRequest {
     repeated string   tags        = 1;
 }
 
-message GetMaterialsByTagsResponse {
+message GetResourcesByTagsResponse {
     repeated Material materials   = 1;
 }

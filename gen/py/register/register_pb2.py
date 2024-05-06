@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0eregister.proto\x12\x06\x61pollo\"T\n\x08Material\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0c\n\x04tags\x18\x04 \x03(\t\x12\x0b\n\x03url\x18\x05 \x01(\t\"O\n\x0fRegisterRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0c\n\x04tags\x18\x03 \x03(\t\x12\x0b\n\x03url\x18\x04 \x01(\t\"\'\n\x10RegisterResponse\x12\x13\n\x0bmaterial_id\x18\x01 \x01(\x04\"-\n\x16GetMaterialByIdRequest\x12\x13\n\x0bmaterial_id\x18\x01 \x01(\x04\"=\n\x17GetMaterialByIdResponse\x12\"\n\x08material\x18\x01 \x01(\x0b\x32\x10.apollo.Material\")\n\x19GetMaterialsByTagsRequest\x12\x0c\n\x04tags\x18\x01 \x03(\t\"A\n\x1aGetMaterialsByTagsResponse\x12#\n\tmaterials\x18\x01 \x03(\x0b\x32\x10.apollo.Material2\x89\x02\n\x0fRegisterService\x12\x45\n\x10RegisterMaterial\x12\x17.apollo.RegisterRequest\x1a\x18.apollo.RegisterResponse\x12R\n\x0fGetMaterialById\x12\x1e.apollo.GetMaterialByIdRequest\x1a\x1f.apollo.GetMaterialByIdResponse\x12[\n\x12GetMaterialsByTags\x12!.apollo.GetMaterialsByTagsRequest\x1a\".apollo.GetMaterialsByTagsResponseB\x11Z\x0fgen/go/registerb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0eregister.proto\x12\x06\x61pollo\"\xa7\x01\n\x08Material\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0c\n\x04tags\x18\x04 \x03(\t\x12\"\n\x04type\x18\x05 \x01(\x0e\x32\x14.apollo.ResourceType\x12\x14\n\x07\x66ile_id\x18\x06 \x01(\x04H\x00\x88\x01\x01\x12\x10\n\x03url\x18\x07 \x01(\tH\x01\x88\x01\x01\x42\n\n\x08_file_idB\x06\n\x04_url\"\xaa\x01\n\x17RegisterResourceRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0c\n\x04tags\x18\x03 \x03(\t\x12\"\n\x04type\x18\x04 \x01(\x0e\x32\x14.apollo.ResourceType\x12\x14\n\x07\x66ile_id\x18\x05 \x01(\x04H\x00\x88\x01\x01\x12\x10\n\x03url\x18\x06 \x01(\tH\x01\x88\x01\x01\x42\n\n\x08_file_idB\x06\n\x04_url\"/\n\x18RegisterResourceResponse\x12\x13\n\x0bmaterial_id\x18\x01 \x01(\x04\"-\n\x16GetResourceByIdRequest\x12\x13\n\x0bmaterial_id\x18\x01 \x01(\x04\"=\n\x17GetResourceByIdResponse\x12\"\n\x08material\x18\x01 \x01(\x0b\x32\x10.apollo.Material\")\n\x19GetResourcesByTagsRequest\x12\x0c\n\x04tags\x18\x01 \x03(\t\"A\n\x1aGetResourcesByTagsResponse\x12#\n\tmaterials\x18\x01 \x03(\x0b\x32\x10.apollo.Material*.\n\x0cResourceType\x12\x0b\n\x07unknown\x10\x00\x12\x08\n\x04\x66ile\x10\x01\x12\x07\n\x03url\x10\x02\x32\x99\x02\n\x0fRegisterService\x12U\n\x10RegisterResource\x12\x1f.apollo.RegisterResourceRequest\x1a .apollo.RegisterResourceResponse\x12R\n\x0fGetResourceById\x12\x1e.apollo.GetResourceByIdRequest\x1a\x1f.apollo.GetResourceByIdResponse\x12[\n\x12GetResourcesByTags\x12!.apollo.GetResourcesByTagsRequest\x1a\".apollo.GetResourcesByTagsResponseB\x11Z\x0fgen/go/registerb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,20 +22,22 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'register_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['DESCRIPTOR']._options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z\017gen/go/register'
-  _globals['_MATERIAL']._serialized_start=26
-  _globals['_MATERIAL']._serialized_end=110
-  _globals['_REGISTERREQUEST']._serialized_start=112
-  _globals['_REGISTERREQUEST']._serialized_end=191
-  _globals['_REGISTERRESPONSE']._serialized_start=193
-  _globals['_REGISTERRESPONSE']._serialized_end=232
-  _globals['_GETMATERIALBYIDREQUEST']._serialized_start=234
-  _globals['_GETMATERIALBYIDREQUEST']._serialized_end=279
-  _globals['_GETMATERIALBYIDRESPONSE']._serialized_start=281
-  _globals['_GETMATERIALBYIDRESPONSE']._serialized_end=342
-  _globals['_GETMATERIALSBYTAGSREQUEST']._serialized_start=344
-  _globals['_GETMATERIALSBYTAGSREQUEST']._serialized_end=385
-  _globals['_GETMATERIALSBYTAGSRESPONSE']._serialized_start=387
-  _globals['_GETMATERIALSBYTAGSRESPONSE']._serialized_end=452
-  _globals['_REGISTERSERVICE']._serialized_start=455
-  _globals['_REGISTERSERVICE']._serialized_end=720
+  _globals['_RESOURCETYPE']._serialized_start=638
+  _globals['_RESOURCETYPE']._serialized_end=684
+  _globals['_MATERIAL']._serialized_start=27
+  _globals['_MATERIAL']._serialized_end=194
+  _globals['_REGISTERRESOURCEREQUEST']._serialized_start=197
+  _globals['_REGISTERRESOURCEREQUEST']._serialized_end=367
+  _globals['_REGISTERRESOURCERESPONSE']._serialized_start=369
+  _globals['_REGISTERRESOURCERESPONSE']._serialized_end=416
+  _globals['_GETRESOURCEBYIDREQUEST']._serialized_start=418
+  _globals['_GETRESOURCEBYIDREQUEST']._serialized_end=463
+  _globals['_GETRESOURCEBYIDRESPONSE']._serialized_start=465
+  _globals['_GETRESOURCEBYIDRESPONSE']._serialized_end=526
+  _globals['_GETRESOURCESBYTAGSREQUEST']._serialized_start=528
+  _globals['_GETRESOURCESBYTAGSREQUEST']._serialized_end=569
+  _globals['_GETRESOURCESBYTAGSRESPONSE']._serialized_start=571
+  _globals['_GETRESOURCESBYTAGSRESPONSE']._serialized_end=636
+  _globals['_REGISTERSERVICE']._serialized_start=687
+  _globals['_REGISTERSERVICE']._serialized_end=968
 # @@protoc_insertion_point(module_scope)

@@ -22,9 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RegisterServiceClient interface {
-	RegisterMaterial(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
-	GetMaterialById(ctx context.Context, in *GetMaterialByIdRequest, opts ...grpc.CallOption) (*GetMaterialByIdResponse, error)
-	GetMaterialsByTags(ctx context.Context, in *GetMaterialsByTagsRequest, opts ...grpc.CallOption) (*GetMaterialsByTagsResponse, error)
+	RegisterResource(ctx context.Context, in *RegisterResourceRequest, opts ...grpc.CallOption) (*RegisterResourceResponse, error)
+	GetResourceById(ctx context.Context, in *GetResourceByIdRequest, opts ...grpc.CallOption) (*GetResourceByIdResponse, error)
+	GetResourcesByTags(ctx context.Context, in *GetResourcesByTagsRequest, opts ...grpc.CallOption) (*GetResourcesByTagsResponse, error)
 }
 
 type registerServiceClient struct {
@@ -35,27 +35,27 @@ func NewRegisterServiceClient(cc grpc.ClientConnInterface) RegisterServiceClient
 	return &registerServiceClient{cc}
 }
 
-func (c *registerServiceClient) RegisterMaterial(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
-	out := new(RegisterResponse)
-	err := c.cc.Invoke(ctx, "/apollo.RegisterService/RegisterMaterial", in, out, opts...)
+func (c *registerServiceClient) RegisterResource(ctx context.Context, in *RegisterResourceRequest, opts ...grpc.CallOption) (*RegisterResourceResponse, error) {
+	out := new(RegisterResourceResponse)
+	err := c.cc.Invoke(ctx, "/apollo.RegisterService/RegisterResource", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *registerServiceClient) GetMaterialById(ctx context.Context, in *GetMaterialByIdRequest, opts ...grpc.CallOption) (*GetMaterialByIdResponse, error) {
-	out := new(GetMaterialByIdResponse)
-	err := c.cc.Invoke(ctx, "/apollo.RegisterService/GetMaterialById", in, out, opts...)
+func (c *registerServiceClient) GetResourceById(ctx context.Context, in *GetResourceByIdRequest, opts ...grpc.CallOption) (*GetResourceByIdResponse, error) {
+	out := new(GetResourceByIdResponse)
+	err := c.cc.Invoke(ctx, "/apollo.RegisterService/GetResourceById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *registerServiceClient) GetMaterialsByTags(ctx context.Context, in *GetMaterialsByTagsRequest, opts ...grpc.CallOption) (*GetMaterialsByTagsResponse, error) {
-	out := new(GetMaterialsByTagsResponse)
-	err := c.cc.Invoke(ctx, "/apollo.RegisterService/GetMaterialsByTags", in, out, opts...)
+func (c *registerServiceClient) GetResourcesByTags(ctx context.Context, in *GetResourcesByTagsRequest, opts ...grpc.CallOption) (*GetResourcesByTagsResponse, error) {
+	out := new(GetResourcesByTagsResponse)
+	err := c.cc.Invoke(ctx, "/apollo.RegisterService/GetResourcesByTags", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -66,9 +66,9 @@ func (c *registerServiceClient) GetMaterialsByTags(ctx context.Context, in *GetM
 // All implementations must embed UnimplementedRegisterServiceServer
 // for forward compatibility
 type RegisterServiceServer interface {
-	RegisterMaterial(context.Context, *RegisterRequest) (*RegisterResponse, error)
-	GetMaterialById(context.Context, *GetMaterialByIdRequest) (*GetMaterialByIdResponse, error)
-	GetMaterialsByTags(context.Context, *GetMaterialsByTagsRequest) (*GetMaterialsByTagsResponse, error)
+	RegisterResource(context.Context, *RegisterResourceRequest) (*RegisterResourceResponse, error)
+	GetResourceById(context.Context, *GetResourceByIdRequest) (*GetResourceByIdResponse, error)
+	GetResourcesByTags(context.Context, *GetResourcesByTagsRequest) (*GetResourcesByTagsResponse, error)
 	mustEmbedUnimplementedRegisterServiceServer()
 }
 
@@ -76,14 +76,14 @@ type RegisterServiceServer interface {
 type UnimplementedRegisterServiceServer struct {
 }
 
-func (UnimplementedRegisterServiceServer) RegisterMaterial(context.Context, *RegisterRequest) (*RegisterResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RegisterMaterial not implemented")
+func (UnimplementedRegisterServiceServer) RegisterResource(context.Context, *RegisterResourceRequest) (*RegisterResourceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterResource not implemented")
 }
-func (UnimplementedRegisterServiceServer) GetMaterialById(context.Context, *GetMaterialByIdRequest) (*GetMaterialByIdResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMaterialById not implemented")
+func (UnimplementedRegisterServiceServer) GetResourceById(context.Context, *GetResourceByIdRequest) (*GetResourceByIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResourceById not implemented")
 }
-func (UnimplementedRegisterServiceServer) GetMaterialsByTags(context.Context, *GetMaterialsByTagsRequest) (*GetMaterialsByTagsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMaterialsByTags not implemented")
+func (UnimplementedRegisterServiceServer) GetResourcesByTags(context.Context, *GetResourcesByTagsRequest) (*GetResourcesByTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResourcesByTags not implemented")
 }
 func (UnimplementedRegisterServiceServer) mustEmbedUnimplementedRegisterServiceServer() {}
 
@@ -98,56 +98,56 @@ func RegisterRegisterServiceServer(s grpc.ServiceRegistrar, srv RegisterServiceS
 	s.RegisterService(&RegisterService_ServiceDesc, srv)
 }
 
-func _RegisterService_RegisterMaterial_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegisterRequest)
+func _RegisterService_RegisterResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterResourceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegisterServiceServer).RegisterMaterial(ctx, in)
+		return srv.(RegisterServiceServer).RegisterResource(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/apollo.RegisterService/RegisterMaterial",
+		FullMethod: "/apollo.RegisterService/RegisterResource",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegisterServiceServer).RegisterMaterial(ctx, req.(*RegisterRequest))
+		return srv.(RegisterServiceServer).RegisterResource(ctx, req.(*RegisterResourceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RegisterService_GetMaterialById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMaterialByIdRequest)
+func _RegisterService_GetResourceById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResourceByIdRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegisterServiceServer).GetMaterialById(ctx, in)
+		return srv.(RegisterServiceServer).GetResourceById(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/apollo.RegisterService/GetMaterialById",
+		FullMethod: "/apollo.RegisterService/GetResourceById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegisterServiceServer).GetMaterialById(ctx, req.(*GetMaterialByIdRequest))
+		return srv.(RegisterServiceServer).GetResourceById(ctx, req.(*GetResourceByIdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _RegisterService_GetMaterialsByTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMaterialsByTagsRequest)
+func _RegisterService_GetResourcesByTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResourcesByTagsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(RegisterServiceServer).GetMaterialsByTags(ctx, in)
+		return srv.(RegisterServiceServer).GetResourcesByTags(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/apollo.RegisterService/GetMaterialsByTags",
+		FullMethod: "/apollo.RegisterService/GetResourcesByTags",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RegisterServiceServer).GetMaterialsByTags(ctx, req.(*GetMaterialsByTagsRequest))
+		return srv.(RegisterServiceServer).GetResourcesByTags(ctx, req.(*GetResourcesByTagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -160,16 +160,16 @@ var RegisterService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*RegisterServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "RegisterMaterial",
-			Handler:    _RegisterService_RegisterMaterial_Handler,
+			MethodName: "RegisterResource",
+			Handler:    _RegisterService_RegisterResource_Handler,
 		},
 		{
-			MethodName: "GetMaterialById",
-			Handler:    _RegisterService_GetMaterialById_Handler,
+			MethodName: "GetResourceById",
+			Handler:    _RegisterService_GetResourceById_Handler,
 		},
 		{
-			MethodName: "GetMaterialsByTags",
-			Handler:    _RegisterService_GetMaterialsByTags_Handler,
+			MethodName: "GetResourcesByTags",
+			Handler:    _RegisterService_GetResourcesByTags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
