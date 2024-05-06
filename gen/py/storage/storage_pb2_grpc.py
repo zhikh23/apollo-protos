@@ -15,12 +15,12 @@ class StorageStub(object):
             channel: A grpc.Channel.
         """
         self.SaveFile = channel.stream_unary(
-                '/appolo.Storage/SaveFile',
+                '/apollo.Storage/SaveFile',
                 request_serializer=storage__pb2.SaveFileRequest.SerializeToString,
                 response_deserializer=storage__pb2.SaveFileResponse.FromString,
                 )
         self.GetFile = channel.unary_stream(
-                '/appolo.Storage/GetFile',
+                '/apollo.Storage/GetFile',
                 request_serializer=storage__pb2.GetFileRequest.SerializeToString,
                 response_deserializer=storage__pb2.GetFileResponse.FromString,
                 )
@@ -56,7 +56,7 @@ def add_StorageServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'appolo.Storage', rpc_method_handlers)
+            'apollo.Storage', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -75,7 +75,7 @@ class Storage(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/appolo.Storage/SaveFile',
+        return grpc.experimental.stream_unary(request_iterator, target, '/apollo.Storage/SaveFile',
             storage__pb2.SaveFileRequest.SerializeToString,
             storage__pb2.SaveFileResponse.FromString,
             options, channel_credentials,
@@ -92,7 +92,7 @@ class Storage(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/appolo.Storage/GetFile',
+        return grpc.experimental.unary_stream(request, target, '/apollo.Storage/GetFile',
             storage__pb2.GetFileRequest.SerializeToString,
             storage__pb2.GetFileResponse.FromString,
             options, channel_credentials,

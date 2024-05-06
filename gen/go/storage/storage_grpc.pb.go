@@ -35,7 +35,7 @@ func NewStorageClient(cc grpc.ClientConnInterface) StorageClient {
 }
 
 func (c *storageClient) SaveFile(ctx context.Context, opts ...grpc.CallOption) (Storage_SaveFileClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Storage_ServiceDesc.Streams[0], "/appolo.Storage/SaveFile", opts...)
+	stream, err := c.cc.NewStream(ctx, &Storage_ServiceDesc.Streams[0], "/apollo.Storage/SaveFile", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ func (x *storageSaveFileClient) CloseAndRecv() (*SaveFileResponse, error) {
 }
 
 func (c *storageClient) GetFile(ctx context.Context, in *GetFileRequest, opts ...grpc.CallOption) (Storage_GetFileClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Storage_ServiceDesc.Streams[1], "/appolo.Storage/GetFile", opts...)
+	stream, err := c.cc.NewStream(ctx, &Storage_ServiceDesc.Streams[1], "/apollo.Storage/GetFile", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +183,7 @@ func (x *storageGetFileServer) Send(m *GetFileResponse) error {
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Storage_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "appolo.Storage",
+	ServiceName: "apollo.Storage",
 	HandlerType: (*StorageServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{

@@ -37,7 +37,7 @@ func NewRegisterServiceClient(cc grpc.ClientConnInterface) RegisterServiceClient
 
 func (c *registerServiceClient) RegisterMaterial(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
 	out := new(RegisterResponse)
-	err := c.cc.Invoke(ctx, "/appolo.RegisterService/RegisterMaterial", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/apollo.RegisterService/RegisterMaterial", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *registerServiceClient) RegisterMaterial(ctx context.Context, in *Regist
 
 func (c *registerServiceClient) GetMaterialById(ctx context.Context, in *GetMaterialByIdRequest, opts ...grpc.CallOption) (*GetMaterialByIdResponse, error) {
 	out := new(GetMaterialByIdResponse)
-	err := c.cc.Invoke(ctx, "/appolo.RegisterService/GetMaterialById", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/apollo.RegisterService/GetMaterialById", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (c *registerServiceClient) GetMaterialById(ctx context.Context, in *GetMate
 
 func (c *registerServiceClient) GetMaterialsByTags(ctx context.Context, in *GetMaterialsByTagsRequest, opts ...grpc.CallOption) (*GetMaterialsByTagsResponse, error) {
 	out := new(GetMaterialsByTagsResponse)
-	err := c.cc.Invoke(ctx, "/appolo.RegisterService/GetMaterialsByTags", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/apollo.RegisterService/GetMaterialsByTags", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ func _RegisterService_RegisterMaterial_Handler(srv interface{}, ctx context.Cont
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/appolo.RegisterService/RegisterMaterial",
+		FullMethod: "/apollo.RegisterService/RegisterMaterial",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RegisterServiceServer).RegisterMaterial(ctx, req.(*RegisterRequest))
@@ -126,7 +126,7 @@ func _RegisterService_GetMaterialById_Handler(srv interface{}, ctx context.Conte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/appolo.RegisterService/GetMaterialById",
+		FullMethod: "/apollo.RegisterService/GetMaterialById",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RegisterServiceServer).GetMaterialById(ctx, req.(*GetMaterialByIdRequest))
@@ -144,7 +144,7 @@ func _RegisterService_GetMaterialsByTags_Handler(srv interface{}, ctx context.Co
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/appolo.RegisterService/GetMaterialsByTags",
+		FullMethod: "/apollo.RegisterService/GetMaterialsByTags",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RegisterServiceServer).GetMaterialsByTags(ctx, req.(*GetMaterialsByTagsRequest))
@@ -156,7 +156,7 @@ func _RegisterService_GetMaterialsByTags_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RegisterService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "appolo.RegisterService",
+	ServiceName: "apollo.RegisterService",
 	HandlerType: (*RegisterServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
